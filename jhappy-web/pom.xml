@@ -3,20 +3,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>com.jhappy</groupId>
+		<artifactId>server-jhappy</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
 	<groupId>com.jhappy</groupId>
 	<artifactId>jhappy-web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>jhappy-web</name>
 	<description>jhappy web project for Spring Boot</description>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,6 +39,44 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>develop</id>
+			<properties>
+				<env>develop</env>
+				<profile-name>develop</profile-name>
+				<assembly-include-resources>application-develop.properties</assembly-include-resources>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<env>test</env>
+				<profile-name>test</profile-name>
+				<assembly-include-resources>application-test.properties</assembly-include-resources>
+			</properties>
+		</profile>
+		<profile>
+			<id>stage</id>
+			<properties>
+				<env>stage</env>
+				<profile-name>stage</profile-name>
+				<assembly-include-resources>application-stage.properties</assembly-include-resources>
+			</properties>
+		</profile>
+		<profile>
+			<id>product</id>
+			<properties>
+				<env>product</env>
+				<profile-name>product</profile-name>
+				<assembly-include-resources>application-product.properties</assembly-include-resources>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
